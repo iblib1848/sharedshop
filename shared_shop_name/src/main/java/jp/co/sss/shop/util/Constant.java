@@ -17,7 +17,13 @@ public class Constant {
 
 	/** 表示順の初期値(新着順) */
 	public static final int DEFAULT_SORT_TYPE = 1;
-
+	
+	/** １ページ目を表示させる */
+	public static final int FIRST_PAGE = 0;
+	
+	/** １ページの表示件数 */
+	public static final int PAGE_ITEMS = 10;
+	
 	/** 支払方法初期値(クレジットカード) */
 	public static final int DEFAULT_PAYMENT_METHOD = 1;
 

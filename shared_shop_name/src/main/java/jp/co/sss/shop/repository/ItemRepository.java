@@ -19,15 +19,24 @@ import jp.co.sss.shop.entity.Item;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	/**
-	 * 商品情報を登録日付順に取得 ホーム画面で利用
+	 * 商品情報を登録日付順に取得 トップページで利用
+	 * @return 商品エンティティ
 	 */
 	List<Item> findByDeleteFlagOrderByInsertDateDesc(Integer deleteFlag);
 	/*
-	 * 商品IDごとに売れている個数ををカウントして昇順で検索　トップページで使用
+	 * 商品IDごとに売れている個数をカウントして昇順で検索　トップページで使用
 	 * @return 商品エンティティ
 	 */
 	@Query("SELECT i FROM Item i LEFT JOIN i.orderItemList oi WHERE i.deleteFlag = :deleteFlag GROUP BY i ORDER BY SUM(oi.quantity)ASC")
 	List<Item> findSalesCountBySellItemsAsc(Integer deleteFlag);
+	
+	/*
+	 * 商品IDごとに売れている個数をカウント　かつ商品カテゴリを絞って昇順で検索　トップページで使用
+	 * @return 商品エンティティ
+	 */
+	@Query("SELECT i FROM Item i LEFT JOIN i.orderItemList oi WHERE i.deleteFlag = :deleteFlag AND i.category.id = :categoryId GROUP BY i ORDER BY SUM(oi.quantity)ASC")
+	List<Item> findSalesCountAndCategoryBySellItemsAsc(Integer deleteFlag,Integer categoryId);
+
 
 	/**
 	 * 商品情報を登録日付順に取得 管理者機能で利用
