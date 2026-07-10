@@ -55,11 +55,11 @@ public class ClientItemShowController {
 		//買い物かごにも商品リストにも商品が無かったら
 		if (orderItems == null && items == null) {
 			model.addAttribute("items", null);
-			//もし買い物かごに何もなかったら新着順	
+			//もし注文一覧に何もなかったら新着順	
 		} else if (orderItems == null) {
 			model.addAttribute("sortType", Constant.DEFAULT_INDEX);
 			model.addAttribute("items", items);
-			//買い物かごに商品があれば売れ筋順で表示
+			//注文一覧に商品があれば売れ筋順で表示
 		} else {
 			model.addAttribute("items", itemRepository.findSalesCountBySellItemsAsc(Constant.NOT_DELETED));
 		}
